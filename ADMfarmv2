@@ -1,0 +1,63 @@
+getgenv (). autofarm = true
+velocidade = 100
+Distância = 10
+interpolação de função (destino)
+    destino local = pcall (function () return target.CFrame end) e target.CFrame ou target
+    jogo: GetService ("TweenService"): Criar (game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new (game.Players.LocalPlayer: DistanceFromCharacter (target.Position) / velocidade, Enum.EasingStyle.Linear), {CFrame = target * CFrame.new (0,0, Distance)}): Play ()
+    esperar (game.Players.LocalPlayer: DistanceFromCharacter (target.Position) / speed)
+fim
+
+spawn (função ()
+    enquanto espera () faz
+        se autofarm então
+            para i, v em pares (workspace.Folders.Monsters: GetChildren ()) faça
+                se v: FindFirstChild ("HumanoidRootPart") e v: FindFirstChildOfClass ("Humanoid") e v: FindFirstChildOfClass ("Humanoid"). Saúde> 0 então
+                    pcall (função ()
+                        repita
+                            esperar()
+                            tween (v.HumanoidRootPart.CFrame)
+                            para i = 1,4 faça
+                                jogo: GetService ("ReplicatedStorage"). RemoteEvents.MainRemoteEvent: FireServer ("UseSkill", {["hrpCFrame"] = v.HumanoidRootPart.CFrame, ["attackNumber"] = i}, "BasicAttack")
+                            fim
+                        até não v ou não v: IsDescendantOf (workspace.Folders) ou v: FindFirstChildOfClass ("Humanoid"). Health == 0
+                    fim)
+                fim
+            fim
+        fim
+    fim
+fim)
+game.RunService.Stepped: Connect (function ()
+    se autofarm então
+        game.Players.LocalPlayer.Character.Humanoid: ChangeState (11)
+    fim
+fim)
+
+spawn (função ()
+    enquanto espera () faz
+        se habilidades automáticas, então
+            jogo: GetService ("VirtualInputManager"): SendKeyEvent (verdadeiro, 49, falso, jogo)
+            jogo: GetService ("VirtualInputManager"): SendKeyEvent (falso, 49, falso, jogo)
+            esperar()
+            jogo: GetService ("VirtualInputManager"): SendKeyEvent (verdadeiro, 50, falso, jogo)
+            jogo: GetService ("VirtualInputManager"): SendKeyEvent (falso, 50, falso, jogo)
+            esperar()
+            jogo: GetService ("VirtualInputManager"): SendKeyEvent (verdadeiro, 51, falso, jogo)
+            jogo: GetService ("VirtualInputManager"): SendKeyEvent (falso, 51, falso, jogo)
+            esperar()
+            jogo: GetService ("VirtualInputManager"): SendKeyEvent (verdadeiro, 52, falso, jogo)
+            jogo: GetService ("VirtualInputManager"): SendKeyEvent (falso, 52, falso, jogo)
+        fim
+    fim
+fim)
+
+spawn (função ()
+    se AutoRetry então 
+        enquanto espera () faz 
+            args locais = {
+            [1] = "RetryDungeon"
+                         }
+
+            jogo: GetService ("ReplicatedStorage"). RemoteEvents.MainRemoteEvent: FireServer (desempacotar (args))
+        fim
+     fim
+ fim)
